@@ -1,0 +1,36 @@
+name: Initialiser les étiquettes
+
+# À lancer une fois après avoir créé un projet depuis ce modèle :
+# onglet Actions › Initialiser les étiquettes › Run workflow.
+# Supprime les étiquettes anglaises par défaut et crée celles de la méthode
+# (fichier .github/labels.json). Les étiquettes « zone » et « offre » sont
+# propres à chaque projet et se créent ensuite.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  etiquettes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Supprimer les étiquettes par défaut
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for l in "bug" "documentation" "duplicate" "enhancement" "good first issue" "help wanted" "invalid" "question" "wontfix"; do
+            gh label delete "$l" --repo "$GITHUB_REPOSITORY" --yes || true
+          done
+      - name: Créer les étiquettes de la méthode
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          jq -c '.[]' .github/labels.json | while read -r l; do
+            gh label create "$(echo "$l" | jq -r .name)" \
+              --color "$(echo "$l" | jq -r .color)" \
+              --description "$(echo "$l" | jq -r .description)" \
+              --repo "$GITHUB_REPOSITORY" --force
+          done

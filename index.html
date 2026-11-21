@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan de classe</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7f0;--card:#fff;--ink:#2a2a2a;--muted:#6e6a63;--line:#e9e2d6;
+  --accent:#e0742b;--accent-ink:#fff;
+  --p1:#2f6fdb;--p1bg:#e8f0ff;--p2:#1f9d55;--p2bg:#e4f6ea;
+  --warn:#b45309;--warnbg:#fff4e5;--bad:#b91c1c;--badbg:#fdecec;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.4}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 16px 0}
+h1{margin:0 0 10px;font-size:1.4rem;font-weight:800;display:flex;align-items:center;gap:8px}
+h1 .logo{width:28px;height:28px;border-radius:8px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:15px}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px}
+nav button{flex:none;border:1px solid var(--line);background:#fff;color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-weight:700;font-size:.92rem;cursor:pointer}
+nav button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+main{max-width:1100px;margin:0 auto;padding:16px}
+section{display:none}
+section.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h2{margin:0 0 10px;font-size:1.05rem;font-weight:800}
+.muted{color:var(--muted);font-size:.9rem}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+button.btn{border:0;background:var(--accent);color:var(--accent-ink);padding:10px 16px;border-radius:10px;font:inherit;font-weight:800;cursor:pointer}
+button.btn.sec{background:#fff;color:var(--ink);border:1px solid var(--line)}
+button.btn.danger{background:#fff;color:var(--bad);border:1px solid #f1c7c7}
+button.btn:disabled{opacity:.5;cursor:default}
+select,input[type=text],input[type=number],textarea{font:inherit;border:1px solid var(--line);border-radius:9px;padding:8px 10px;background:#fff;color:var(--ink)}
+textarea{width:100%;min-height:110px;resize:vertical}
+label.inline{display:flex;align-items:center;gap:6px;font-weight:600}
+.banner{background:#fff8ec;border:1px solid #f3dcb5;border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.85rem;color:var(--muted);margin:4px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}
+.tcard .th{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin:0 2px 8px}
+.tcard .th small{font-weight:600;color:var(--muted)}
+.seats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seat{min-height:56px;border-radius:10px;border:1px solid var(--line);padding:6px 8px;cursor:pointer;user-select:none;display:flex;flex-direction:column;justify-content:center;background:#faf8f4;transition:transform .08s}
+.seat:active{transform:scale(.97)}
+.seat .nm{font-weight:800;font-size:.98rem;display:flex;align-items:center;gap:4px;word-break:break-word}
+.seat .meta{font-size:.75rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+.seat.p1{background:var(--p1bg);border-color:#c9dbff;border-left:4px solid var(--p1)}
+.seat.p2{background:var(--p2bg);border-color:#bfe6cd;border-left:4px solid var(--p2)}
+.seat.empty{border-style:dashed;color:#b3ab9e;align-items:center;font-size:.85rem}
+.seat.sel{outline:3px solid var(--accent);outline-offset:1px}
+.seat.conflict{box-shadow:inset 0 0 0 2px var(--bad)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.tag{font-size:.7rem;font-weight:800;border-radius:6px;padding:1px 5px;background:#fff;border:1px solid var(--line)}
+.warns{margin:12px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.warns li{padding:8px 10px;border-radius:9px;font-size:.92rem}
+.warns li.bad{background:var(--badbg);color:var(--bad)}
+.warns li.warn{background:var(--warnbg);color:var(--warn)}
+.warns li.ok{background:var(--p2bg);color:#166534}
+.unplaced{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.unplaced .seat{min-height:auto;flex:none}
+.stu{display:grid;grid-template-columns:minmax(110px,1.4fr) 90px minmax(130px,1fr) minmax(110px,1fr) 40px;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.stu:first-child{border-top:0}
+.stu input[type=text]{width:100%;font-weight:700}
+.stu select{width:100%}
+.stu .del{border:0;background:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:6px}
+.stu .del:hover{color:var(--bad)}
+.stu-head{font-size:.78rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-top:0;padding-bottom:0}
+@media (max-width:640px){
+  .stu{grid-template-columns:1fr 80px 36px;}
+  .stu .att,.stu .fix{grid-column:span 1}
+  .stu .att{grid-column:1/2}
+  .stu .fix{grid-column:2/4}
+  .stu-head{display:none}
+}
+.pairs{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:6px}
+.pairs li{display:flex;justify-content:space-between;align-items:center;background:#faf8f4;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-weight:700}
+.pairs button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:1rem}
+.hist{border-top:1px solid var(--line);padding:10px 0}
+.hist:first-of-type{border-top:0}
+.hist .hh{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:800}
+.hist .ht{font-size:.88rem;color:var(--muted);margin-top:4px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(30px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;opacity:0;transition:.25s;pointer-events:none;max-width:90vw;text-align:center;z-index:20}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.setgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.radio{display:flex;flex-direction:column;gap:6px}
+.radio label{display:flex;gap:8px;align-items:flex-start;font-weight:600}
+.small{font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="logo">✎</span>Plan de classe</h1>
+  <nav id="tabs">
+    <button data-tab="plan" class="on">Plan</button>
+    <button data-tab="eleves">Élèves</button>
+    <button data-tab="reglages">Réglages</button>
+    <button data-tab="historique">Historique</button>
+    <button data-tab="sauvegarde">Sauvegarde</button>
+  </nav>
+</header>
+
+<main>
+  <div id="demo-banner"></div>
+
+  <section id="tab-plan" class="on">
+    <div class="card">
+      <div class="row" style="justify-content:space-between">
+        <div class="row">
+          <button class="btn" id="gen">Générer un plan</button>
+          <button class="btn sec" id="validate">Valider ce plan</button>
+        </div>
+        <span class="muted" id="plan-info"></span>
+      </div>
+      <div class="legend">
+        <span><i class="sw" style="background:var(--p1)"></i>1P</span>
+        <span><i class="sw" style="background:var(--p2)"></i>2P</span>
+        <span><i class="dot"></i>Beaucoup d'attention</span>
+        <span><b class="tag">A</b>Autonome</span>
+        <span>📌 Place fixe</span>
+      </div>
+      <p class="muted small" style="margin:0">Touchez un élève puis un autre (ou une place vide) pour les échanger. Validez le plan quand il vous convient : il est gardé en mémoire pour éviter de remettre les mêmes enfants ensemble la prochaine fois.</p>
+    </div>
+    <div id="plan-area"></div>
+  </section>
+
+  <section id="tab-eleves">
+    <div class="card">
+      <h2>Ajouter des élèves</h2>
+      <textarea id="bulk" placeholder="Un prénom par ligne"></textarea>
+      <div class="row" style="margin-top:10px">
+        <label class="inline">Degré
+          <select id="bulk-level"><option>1P</option><option>2P</option></select>
+        </label>
+        <label class="inline">Attention
+          <select id="bulk-att">
+            <option value="normale">Normal</option>
+            <option value="haute">Beaucoup d'attention</option>
+            <option value="autonome">Autonome</option>
+          </select>
+        </label>
+        <button class="btn" id="bulk-add">Ajouter</button>
+      </div>
+      <p class="muted small" style="margin:8px 0 0">Vous pourrez ajuster chaque élève ensuite dans la liste.</p>
+    </div>
+    <div class="card">
+      <h2 id="stu-title">Élèves</h2>
+      <div id="stu-list"></div>
+    </div>
+    <div class="card">
+      <h2>À ne pas mettre à la même table</h2>
+      <div class="row">
+        <select id="pair-a"></select>
+        <span>et</span>
+        <select id="pair-b"></select>
+        <button class="btn sec" id="pair-add">Ajouter</button>
+      </div>
+      <ul class="pairs" id="pair-list"></ul>
+    </div>
+  </section>
+
+  <section id="tab-reglages">
+    <div class="card">
+      <h2>La classe</h2>
+      <div class="setgrid">
+        <label class="inline">Nombre de tables
+          <input type="number" id="set-tables" min="1" max="20" style="width:80px">
+        </label>
+        <label class="inline">Places par table
+          <input type="number" id="set-seats" min="1" max="10" style="width:80px">
+        </label>
+      </div>
+      <p class="muted" id="capacity" style="margin:10px 0 0"></p>
+    </div>
+    <div class="card">
+      <h2>Règles de répartition</h2>
+      <div class="setgrid">
+        <div class="radio">
+          <b>1P et 2P</b>
+          <label><input type="radio" name="lvl" value="mix"> Mélanger à chaque table</label>
+          <label><input type="radio" name="lvl" value="group"> Regrouper par degré</label>
+          <label><input type="radio" name="lvl" value="any"> Peu importe</label>
+        </div>
+        <div class="radio">
+          <b>Attention</b>
+          <label><input type="checkbox" id="set-spread"> Répartir les élèves qui demandent beaucoup d'attention (éviter qu'ils soient à la même table)</label>
+        </div>
+        <div class="radio">
+          <b>Changer de voisins</b>
+          <label class="inline">Éviter les voisins des
+            <select id="set-depth">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="6">6</option><option value="10">10</option>
+            </select>
+            derniers plans validés
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tab-historique">
+    <div class="card">
+      <h2>Plans validés</h2>
+      <div id="hist-list"></div>
+    </div>
+  </section>
+
+  <section id="tab-sauvegarde">
+    <div class="card">
+      <h2>Où sont les données ?</h2>
+      <p class="muted" style="margin:0">Tout reste dans ce navigateur, sur cet appareil. Rien n'est envoyé ailleurs. Pour ne rien perdre (ou passer sur un autre appareil), copiez la sauvegarde et gardez-la dans un fichier ou un e-mail à vous-même.</p>
+    </div>
+    <div class="card">
+      <h2>Copier la sauvegarde</h2>
+      <button class="btn" id="bk-copy">Copier</button>
+      <textarea id="bk-out" readonly style="margin-top:10px;display:none"></textarea>
+    </div>
+    <div class="card">
+      <h2>Restaurer une sauvegarde</h2>
+      <textarea id="bk-in" placeholder="Collez ici le texte de la sauvegarde"></textarea>
+      <div class="row" style="margin-top:10px">
+        <button class="btn sec" id="bk-restore">Restaurer</button>
+        <label class="btn sec" style="display:inline-block;cursor:pointer">Ouvrir un fichier
+          <input type="file" id="bk-file" accept=".json,.txt,application/json,text/plain" style="display:none">
+        </label>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Tout effacer</h2>
+      <button class="btn danger" id="bk-reset">Repartir de zéro</button>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+const LS_KEY='plan-de-classe-v1';
+const $=s=>document.querySelector(s);
+const uid=()=>Math.random().toString(36).slice(2,10);
+const rand=n=>Math.floor(Math.random()*n);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pairKey=(a,b)=>a<b?a+'|'+b:b+'|'+a;
+const ATT_W={haute:2,normale:1,autonome:0};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=rand(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function emptyState(){
+  return {version:1,demo:false,tables:5,seats:4,levelMode:'mix',spreadAttention:true,histDepth:4,students:[],avoid:[],history:[],current:null};
+}
+function demoState(){
+  const list=[['Léa','1P','normale'],['Noah','2P','haute'],['Emma','2P','autonome'],['Liam','1P','haute'],['Chloé','1P','normale'],['Gabriel','2P','normale'],['Mia','1P','autonome'],['Luca','2P','normale'],['Zoé','1P','haute'],['Nathan','2P','autonome'],['Alice','1P','normale'],['Arthur','2P','normale'],['Lina','1P','normale'],['Samuel','2P','haute'],['Inès','1P','autonome'],['Théo','2P','normale'],['Jade','1P','normale'],['Elias','2P','autonome'],['Lou','1P','normale'],['Matteo','2P','normale']];
+  const s=emptyState();
+  s.demo=true;
+  s.students=list.map(([name,level,attention])=>({id:uid(),name,level,attention,fixed:null}));
+  s.avoid=[[s.students[1].id,s.students[3].id]];
+  return s;
+}
+function load(){
+  try{const raw=localStorage.getItem(LS_KEY);if(raw){const s=JSON.parse(raw);if(s&&Array.isArray(s.students))return Object.assign(emptyState(),s);}}catch(e){}
+  return demoState();
+}
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(state));}catch(e){}}
+
+let state=load();
+let sel=null;
+let tab='plan';
+
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2600);}
+const byId=()=>new Map(state.students.map(s=>[s.id,s]));
+
+/* ---------- Algorithme ---------- */
+function buildCtx(){
+  const by=byId();
+  const avoid=new Set(state.avoid.map(([a,b])=>pairKey(a,b)));
+  const hist=new Map();
+  const K=Math.max(1,+state.histDepth||1);
+  state.history.slice(0,K).forEach((h,idx)=>{
+    const w=60*(K-idx)/K;
+    h.tables.forEach(t=>{for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++){if(by.has(t[i])&&by.has(t[j])){const k=pairKey(t[i],t[j]);hist.set(k,(hist.get(k)||0)+w);}}});
+  });
+  const n=state.students.length;
+  const n1=state.students.filter(s=>s.level==='1P').length;
+  const load=state.students.reduce((a,s)=>a+(ATT_W[s.attention]??1),0);
+  const fixed=new Set(state.students.filter(s=>s.fixed!=null&&s.fixed<state.tables).map(s=>s.id));
+  return {by,avoid,hist,ratio1:n?n1/n:0,meanLoad:n?load/n:0,fixed,mode:state.levelMode,spread:state.spreadAttention};
+}
+function tableCost(t,c){
+  let cost=0,n1=0,high=0,load=0;
+  for(let i=0;i<t.length;i++){
+    const s=c.by.get(t[i]);if(!s)continue;
+    if(s.level==='1P')n1++;
+    if(s.attention==='haute')high++;
+    load+=ATT_W[s.attention]??1;
+    for(let j=i+1;j<t.length;j++){
+      const k=pairKey(t[i],t[j]);
+      if(c.avoid.has(k))cost+=1000;
+      cost+=c.hist.get(k)||0;
+    }
+  }
+  const len=t.length,n2=len-n1;
+  if(c.spread){
+    if(high>1)cost+=45*(high-1)*(high-1);
+    const d=load-c.meanLoad*len;cost+=6*d*d;
+  }
+  if(c.mode==='mix'&&len>=2){
+    if(n1===0||n2===0)cost+=25;
+    const d=n1-c.ratio1*len;cost+=10*d*d;
+  }else if(c.mode==='group'){
+    cost+=30*Math.min(n1,n2);
+  }
+  return cost;
+}
+function construct(T,S){
+  const tables=Array.from({length:T},()=>[]);
+  const free=[];
+  state.students.forEach(s=>{if(s.fixed!=null&&s.fixed<T)tables[s.fixed].push(s.id);else free.push(s.id);});
+  shuffle(free);
+  for(const id of free){
+    let cands=tables.map((_,i)=>i).filter(i=>tables[i].length<S);
+    if(!cands.length)cands=tables.map((_,i)=>i);
+    const m=Math.min(...cands.map(i=>tables[i].length));
+    cands=cands.filter(i=>tables[i].length===m);
+    tables[cands[rand(cands.length)]].push(id);
+  }
+  return tables;
+}
+function generate(){
+  const T=state.tables,S=state.seats,n=state.students.length;
+  if(!n)return {error:"Ajoutez d'abord des élèves (onglet Élèves)."};
+  if(n>T*S)return {error:`${n} élèves pour ${T*S} places : ajoutez des tables ou des places (onglet Réglages).`};
+  const c=buildCtx();
+  let best=null,bestCost=Infinity;
+  for(let r=0;r<15;r++){
+    const tables=construct(T,S);
+    const costs=tables.map(t=>tableCost(t,c));
+    for(let it=0;it<2500;it++){
+      const a=rand(T),b=rand(T);if(a===b)continue;
+      const ta=tables[a],tb=tables[b];if(!ta.length||!tb.length)continue;
+      const i=rand(ta.length),j=rand(tb.length);
+      if(c.fixed.has(ta[i])||c.fixed.has(tb[j]))continue;
+      [ta[i],tb[j]]=[tb[j],ta[i]];
+      const ca=tableCost(ta,c),cb=tableCost(tb,c);
+      if(ca+cb<=costs[a]+costs[b]){costs[a]=ca;costs[b]=cb;}
+      else{[ta[i],tb[j]]=[tb[j],ta[i]];}
+    }
+    const total=costs.reduce((x,y)=>x+y,0);
+    if(total<bestCost){bestCost=total;best=tables.map(t=>t.slice());}
+  }
+  best.forEach(shuffle);
+  return {tables:best};
+}
+function analyze(tables){
+  const c=buildCtx(),by=c.by,out=[],bad=new Set();
+  const last=state.history[0],lastSet=new Set();
+  if(last)last.tables.forEach(t=>{for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++)lastSet.add(pairKey(t[i],t[j]));});
+  const nm=id=>by.get(id)?.name||'?';
+  tables.forEach((t,ti)=>{
+    const L=`Table ${ti+1}`;
+    if(t.length>state.seats)out.push({lvl:'bad',msg:`${L} : ${t.length} élèves pour ${state.seats} places`});
+    for(let i=0;i<t.length;i++)for(let j=i+1;j<t.length;j++){
+      const k=pairKey(t[i],t[j]);
+      if(c.avoid.has(k)){out.push({lvl:'bad',msg:`${L} : ${nm(t[i])} et ${nm(t[j])} sont ensemble (à séparer)`});bad.add(t[i]);bad.add(t[j]);}
+      else if(lastSet.has(k))out.push({lvl:'warn',msg:`${L} : ${nm(t[i])} et ${nm(t[j])} étaient déjà ensemble au dernier plan`});
+    }
+    const ss=t.map(id=>by.get(id)).filter(Boolean);
+    const high=ss.filter(s=>s.attention==='haute').length;
+    if(c.spread&&high>1)out.push({lvl:'warn',msg:`${L} : ${high} élèves qui demandent beaucoup d'attention`});
+    const n1=ss.filter(s=>s.level==='1P').length,n2=ss.length-n1;
+    if(c.mode==='mix'&&ss.length>=2&&(n1===0||n2===0))out.push({lvl:'warn',msg:`${L} : uniquement des ${n1?'1P':'2P'}`});
+    if(c.mode==='group'&&n1&&n2)out.push({lvl:'warn',msg:`${L} : 1P et 2P mélangés`});
+  });
+  return {list:out,bad};
+}
+
+/* ---------- Rendu : plan ---------- */
+function planTables(){
+  const cur=state.current;if(!cur)return null;
+  const by=byId();
+  let tables=cur.tables.map(t=>t.filter(id=>by.has(id)));
+  while(tables.length<state.tables)tables.push([]);
+  cur.tables=tables;
+  return tables;
+}
+function seatHTML(s,attrs,cls){
+  if(!s)return `<div class="seat empty ${cls||''}" ${attrs}>place libre</div>`;
+  const att=s.attention==='haute'?'<i class="dot" title="Beaucoup d\'attention"></i>':s.attention==='autonome'?'<b class="tag" title="Autonome">A</b>':'';
+  const pin=(s.fixed!=null&&s.fixed<state.tables)?'📌':'';
+  return `<div class="seat ${s.level==='1P'?'p1':'p2'} ${cls||''}" ${attrs}><div class="nm">${esc(s.name)} ${pin}</div><div class="meta">${s.level} ${att}</div></div>`;
+}
+function renderPlan(){
+  const area=$('#plan-area');
+  const tables=planTables();
+  const by=byId();
+  $('#validate').disabled=!tables;
+  $('#gen').textContent=tables?'Regénérer':'Générer un plan';
+  $('#plan-info').textContent=`${state.students.length} élèves · ${state.tables} tables × ${state.seats} places`;
+  if(!tables){
+    area.innerHTML=`<div class="card muted">Aucun plan pour l'instant. Touchez « Générer un plan ».</div>`;
+    return;
+  }
+  const an=analyze(tables);
+  let h='<div class="grid">';
+  tables.forEach((t,ti)=>{
+    const nSeats=Math.max(state.seats,t.length);
+    h+=`<div class="tcard"><div class="th">Table ${ti+1}<small>${t.length}/${state.seats}</small></div><div class="seats">`;
+    for(let i=0;i<nSeats;i++){
+      const id=t[i],s=id?by.get(id):null;
+      const isSel=sel&&sel.t===ti&&sel.i===i;
+      h+=seatHTML(s,`data-t="${ti}" data-i="${i}"`,(isSel?'sel ':'')+(id&&an.bad.has(id)?'conflict':''));
+    }
+    h+='</div></div>';
+  });
+  h+='</div>';
+  const placed=new Set(tables.flat());
+  const unplaced=state.students.filter(s=>!placed.has(s.id));
+  if(unplaced.length){
+    h+=`<div class="card" style="margin-top:12px"><h2>Pas encore placés (${unplaced.length})</h2><p class="muted small" style="margin:0">Touchez un élève puis une place libre, ou regénérez le plan.</p><div class="unplaced">`;
+    unplaced.forEach(s=>{h+=seatHTML(s,`data-t="-1" data-id="${s.id}"`,sel&&sel.t===-1&&sel.id===s.id?'sel':'');});
+    h+='</div></div>';
+  }
+  h+='<ul class="warns">';
+  if(!an.list.length)h+='<li class="ok">Toutes les règles sont respectées.</li>';
+  an.list.forEach(w=>{h+=`<li class="${w.lvl}">${esc(w.msg)}</li>`;});
+  h+='</ul>';
+  area.innerHTML=h;
+}
+function seatClick(el){
+  const t=+el.dataset.t;
+  const pos=t===-1?{t:-1,id:el.dataset.id}:{t,i:+el.dataset.i};
+  const tables=state.current.tables;
+  const getId=p=>p.t===-1?p.id:tables[p.t][p.i];
+  if(!sel){if(getId(pos))sel=pos;renderPlan();return;}
+  const same=sel.t===pos.t&&(pos.t===-1?sel.id===pos.id:sel.i===pos.i);
+  if(same){sel=null;renderPlan();return;}
+  if(pos.t===-1){sel=pos;renderPlan();return;}
+  const A=getId(sel),B=getId(pos);
+  if(sel.t>=0){tables[sel.t][sel.i]=B;}
+  tables[pos.t][pos.i]=A;
+  state.current.tables=tables.map(tb=>tb.filter(Boolean));
+  sel=null;save();renderPlan();
+}
+
+/* ---------- Rendu : élèves ---------- */
+function renderStudents(){
+  const st=state.students;
+  const n1=st.filter(s=>s.level==='1P').length;
+  $('#stu-title').textContent=`Élèves (${st.length}) — ${n1} en 1P, ${st.length-n1} en 2P`;
+  let h='';
+  if(!st.length)h='<p class="muted">Aucun élève pour l\'instant.</p>';
+  else{
+    h+='<div class="stu stu-head"><span>Prénom</span><span>Degré</span><span>Attention</span><span>Place fixe</span><span></span></div>';
+    st.forEach(s=>{
+      let fix='<option value="">Pas de place fixe</option>';
+      for(let i=0;i<state.tables;i++)fix+=`<option value="${i}" ${s.fixed===i?'selected':''}>📌 Table ${i+1}</option>`;
+      h+=`<div class="stu" data-id="${s.id}">
+        <input type="text" data-f="name" value="${esc(s.name)}" aria-label="Prénom">
+        <select data-f="level" aria-label="Degré"><option ${s.level==='1P'?'selected':''}>1P</option><option ${s.level==='2P'?'selected':''}>2P</option></select>
+        <select data-f="attention" class="att" aria-label="Attention">
+          <option value="haute" ${s.attention==='haute'?'selected':''}>Beaucoup d'attention</option>
+          <option value="normale" ${s.attention==='normale'?'selected':''}>Normal</option>
+          <option value="autonome" ${s.attention==='autonome'?'selected':''}>Autonome</option>
+        </select>
+        <select data-f="fixed" class="fix" aria-label="Place fixe">${fix}</select>
+        <button class="del" data-del="1" title="Supprimer">✕</button>
+      </div>`;
+    });
+  }
+  $('#stu-list').innerHTML=h;
+  const opts='<option value="">Choisir…</option>'+[...st].sort((a,b)=>a.name.localeCompare(b.name,'fr')).map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join('');
+  $('#pair-a').innerHTML=opts;$('#pair-b').innerHTML=opts;
+  const by=byId();
+  $('#pair-list').innerHTML=state.avoid.length?state.avoid.map(([a,b],i)=>`<li>${esc(by.get(a)?.name||'?')} ✕ ${esc(by.get(b)?.name||'?')}<button data-pdel="${i}" title="Retirer">✕</button></li>`).join(''):'<li class="muted" style="font-weight:600">Aucune paire pour l\'instant.</li>';
+}
+
+/* ---------- Rendu : réglages ---------- */
+function renderSettings(){
+  $('#set-tables').value=state.tables;
+  $('#set-seats').value=state.seats;
+  document.querySelectorAll('input[name=lvl]').forEach(r=>r.checked=r.value===state.levelMode);
+  $('#set-spread').checked=!!state.spreadAttention;
+  $('#set-depth').value=String(state.histDepth);
+  const cap=state.tables*state.seats,n=state.students.length;
+  $('#capacity').textContent=`${cap} places pour ${n} élèves`+(n>cap?` — il manque ${n-cap} place(s).`:'.');
+  $('#capacity').style.color=n>cap?'var(--bad)':'';
+}
+
+/* ---------- Rendu : historique ---------- */
+function renderHistory(){
+  if(!state.history.length){$('#hist-list').innerHTML='<p class="muted">Aucun plan validé pour l\'instant.</p>';return;}
+  const by=byId();
+  $('#hist-list').innerHTML=state.history.map((h,i)=>{
+    const d=new Date(h.date);
+    const ds=d.toLocaleDateString('fr-CH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    const nm=id=>by.get(id)?.name||h.names?.[id]||'?';
+    const tt=h.tables.map((t,ti)=>t.length?`<div><b>T${ti+1}</b> : ${t.map(id=>esc(nm(id))).join(', ')}</div>`:'').join('');
+    return `<div class="hist"><div class="hh"><span>${esc(ds)}${i===0?' · le plus récent':''}</span><span class="row"><button class="btn sec small" data-hload="${i}">Reprendre</button><button class="btn danger small" data-hdel="${i}">Supprimer</button></span></div><div class="ht">${tt}</div></div>`;
+  }).join('');
+}
+
+function renderBanner(){
+  $('#demo-banner').innerHTML=state.demo?`<div class="banner"><span>Ceci est un <b>exemple</b> avec des prénoms fictifs, pour essayer.</span><span class="row"><button class="btn" id="demo-clear">Commencer avec ma classe</button><button class="btn sec" id="demo-keep">Garder l'exemple</button></span></div>`:'';
+}
+
+function render(){
+  renderBanner();
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  document.querySelectorAll('main section').forEach(s=>s.classList.toggle('on',s.id==='tab-'+tab));
+  if(tab==='plan')renderPlan();
+  if(tab==='eleves')renderStudents();
+  if(tab==='reglages')renderSettings();
+  if(tab==='historique')renderHistory();
+}
+
+/* ---------- Événements ---------- */
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tab=b.dataset.tab;sel=null;render();window.scrollTo(0,0);});
+$('#demo-banner').addEventListener('click',e=>{
+  if(e.target.id==='demo-clear'){const keep={tables:state.tables,seats:state.seats,levelMode:state.levelMode,spreadAttention:state.spreadAttention,histDepth:state.histDepth};state=Object.assign(emptyState(),keep);save();tab='eleves';render();}
+  if(e.target.id==='demo-keep'){state.demo=false;save();render();}
+});
+$('#gen').addEventListener('click',()=>{
+  const r=generate();
+  if(r.error){toast(r.error);return;}
+  state.current={tables:r.tables,date:new Date().toISOString()};
+  sel=null;save();renderPlan();
+});
+$('#validate').addEventListener('click',()=>{
+  const tables=planTables();if(!tables)return;
+  const by=byId();const names={};
+  tables.flat().forEach(id=>{names[id]=by.get(id)?.name;});
+  state.history.unshift({date:new Date().toISOString(),tables:tables.map(t=>t.slice()),names});
+  if(state.history.length>30)state.history.length=30;
+  save();toast('Plan validé et ajouté à l\'historique');
+});
+$('#plan-area').addEventListener('click',e=>{const s=e.target.closest('.seat');if(s)seatClick(s);});
+
+$('#bulk-add').addEventListener('click',()=>{
+  const names=$('#bulk').value.split(/\n|,|;/).map(x=>x.trim()).filter(Boolean);
+  if(!names.length){toast('Écrivez au moins un prénom');return;}
+  const level=$('#bulk-level').value,attention=$('#bulk-att').value;
+  names.forEach(name=>state.students.push({id:uid(),name,level,attention,fixed:null}));
+  $('#bulk').value='';save();renderStudents();toast(`${names.length} élève(s) ajouté(s)`);
+});
+$('#stu-list').addEventListener('change',e=>{
+  const row=e.target.closest('.stu');if(!row)return;
+  const s=state.students.find(x=>x.id===row.dataset.id);if(!s)return;
+  const f=e.target.dataset.f;
+  if(f==='name'){const v=e.target.value.trim();if(v)s.name=v;else e.target.value=s.name;}
+  else if(f==='fixed')s.fixed=e.target.value===''?null:+e.target.value;
+  else if(f)s[f]=e.target.value;
+  save();
+});
+$('#stu-list').addEventListener('click',e=>{
+  if(!e.target.dataset.del)return;
+  const id=e.target.closest('.stu').dataset.id;
+  state.students=state.students.filter(s=>s.id!==id);
+  state.avoid=state.avoid.filter(([a,b])=>a!==id&&b!==id);
+  if(state.current)state.current.tables=state.current.tables.map(t=>t.filter(x=>x!==id));
+  save();renderStudents();
+});
+$('#pair-add').addEventListener('click',()=>{
+  const a=$('#pair-a').value,b=$('#pair-b').value;
+  if(!a||!b||a===b){toast('Choisissez deux élèves différents');return;}
+  if(state.avoid.some(([x,y])=>pairKey(x,y)===pairKey(a,b))){toast('Cette paire existe déjà');return;}
+  state.avoid.push([a,b]);save();renderStudents();
+});
+$('#pair-list').addEventListener('click',e=>{const i=e.target.dataset.pdel;if(i==null)return;state.avoid.splice(+i,1);save();renderStudents();});
+
+$('#set-tables').addEventListener('change',e=>{
+  const v=Math.max(1,Math.min(20,parseInt(e.target.value)||1));state.tables=v;
+  state.students.forEach(s=>{if(s.fixed!=null&&s.fixed>=v)s.fixed=null;});
+  if(state.current&&state.current.tables.length>v){const extra=state.current.tables.slice(v).flat();state.current.tables=state.current.tables.slice(0,v);if(extra.length)toast(`${extra.length} élève(s) à replacer sur le plan`);}
+  save();renderSettings();
+});
+$('#set-seats').addEventListener('change',e=>{state.seats=Math.max(1,Math.min(10,parseInt(e.target.value)||4));save();renderSettings();});
+document.querySelectorAll('input[name=lvl]').forEach(r=>r.addEventListener('change',()=>{state.levelMode=r.value;save();}));
+$('#set-spread').addEventListener('change',e=>{state.spreadAttention=e.target.checked;save();});
+$('#set-depth').addEventListener('change',e=>{state.histDepth=+e.target.value;save();});
+
+$('#hist-list').addEventListener('click',e=>{
+  const l=e.target.dataset.hload,d=e.target.dataset.hdel;
+  if(l!=null){state.current={tables:state.history[+l].tables.map(t=>t.slice()),date:new Date().toISOString()};save();tab='plan';render();toast('Plan repris : vous pouvez le modifier');}
+  if(d!=null){
+    if(e.target.dataset.armed){state.history.splice(+d,1);save();renderHistory();}
+    else{e.target.dataset.armed='1';e.target.textContent='Confirmer ?';setTimeout(()=>{if(e.target.isConnected){delete e.target.dataset.armed;e.target.textContent='Supprimer';}},3000);}
+  }
+});
+
+$('#bk-copy').addEventListener('click',async()=>{
+  const data=JSON.stringify(Object.assign({},state,{demo:false}));
+  const out=$('#bk-out');out.value=data;
+  try{await navigator.clipboard.writeText(data);toast('Sauvegarde copiée : collez-la dans un fichier ou un e-mail');out.style.display='none';}
+  catch(err){out.style.display='block';out.focus();out.select();toast('Copiez le texte affiché (tout sélectionner, puis copier)');}
+});
+function restore(txt){
+  try{
+    const s=JSON.parse(txt);
+    if(!s||!Array.isArray(s.students))throw 0;
+    state=Object.assign(emptyState(),s,{demo:false});sel=null;save();tab='plan';render();toast('Sauvegarde restaurée');
+  }catch(e){toast('Ce texte n\'est pas une sauvegarde valide');}
+}
+$('#bk-restore').addEventListener('click',()=>restore($('#bk-in').value.trim()));
+$('#bk-file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>restore(String(r.result).trim());r.readAsText(f);e.target.value='';});
+$('#bk-reset').addEventListener('click',e=>{
+  const b=e.currentTarget;
+  if(b.dataset.armed){state=emptyState();sel=null;save();tab='eleves';render();toast('Tout a été effacé');delete b.dataset.armed;b.textContent='Repartir de zéro';}
+  else{b.dataset.armed='1';b.textContent='Confirmer : tout effacer ?';setTimeout(()=>{delete b.dataset.armed;b.textContent='Repartir de zéro';},4000);}
+});
+
+render();
+})();
+</script>
+</body>
+</html>

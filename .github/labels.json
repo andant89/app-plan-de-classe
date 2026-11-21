@@ -1,0 +1,11 @@
+[
+  {"name": "type: user story", "color": "1D76DB", "description": "Une fonction décrite du point de vue de l'utilisateur"},
+  {"name": "type: incident", "color": "1D76DB", "description": "Quelque chose ne marche pas (un critère a échoué)"},
+  {"name": "type: demande", "color": "1D76DB", "description": "Nouvelle idée ou amélioration"},
+  {"name": "type: tâche", "color": "1D76DB", "description": "Travail qui n'est pas une fonction : icône, fiche du store, documents…"},
+  {"name": "P1 · indispensable", "color": "B60205", "description": "Story : sans elle, pas de sortie. Incident : bloquant"},
+  {"name": "P2 · important", "color": "FBCA04", "description": "Story : attendue mais pas bloquante. Incident : gênant, contournable"},
+  {"name": "P3 · souhaitable", "color": "C2E0C6", "description": "Story : un plus. Incident : détail (texte, alignement)"},
+  {"name": "statut: à tester", "color": "0E8A16", "description": "Codé, à vérifier sur l'appareil"},
+  {"name": "statut: bloqué", "color": "D93F0B", "description": "En attente d'une décision ou d'un élément extérieur"}
+]

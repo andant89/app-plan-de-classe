@@ -1,0 +1,33 @@
+name: Incident
+description: Quelque chose ne fonctionne pas comme prévu dans l'app.
+title: "[Incident] "
+labels: ["type: incident"]
+body:
+  - type: input
+    id: critere
+    attributes:
+      label: Numéro du critère qui a échoué
+      description: Le numéro se trouve dans docs/user-stories.md ou dans l'issue de la story. Laisse vide si aucun ne correspond.
+      placeholder: "US-05.3"
+  - type: textarea
+    id: quoi
+    attributes:
+      label: Ce qui s'est passé
+      description: Ce que tu as fait, puis ce que tu as vu.
+      placeholder: "J'ai modifié l'heure de début, mais l'heure de fin prévue n'a pas changé."
+    validations:
+      required: true
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Ce qui aurait dû se passer
+  - type: input
+    id: appareil
+    attributes:
+      label: Appareil et version d'iOS
+      placeholder: "iPhone 15, iOS 26.0 — ou ordinateur, navigateur"
+  - type: textarea
+    id: captures
+    attributes:
+      label: Captures d'écran
+      description: Glisse tes images ici.

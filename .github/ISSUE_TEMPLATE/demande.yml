@@ -1,0 +1,19 @@
+name: Demande
+description: Une idée de nouvelle fonction ou d'amélioration.
+title: "[Demande] "
+labels: ["type: demande"]
+body:
+  - type: input
+    id: story
+    attributes:
+      label: Story concernée
+      description: Si la demande modifie une story existante, indique son numéro. Sinon, laisse vide.
+      placeholder: "US-12"
+  - type: textarea
+    id: besoin
+    attributes:
+      label: Le besoin
+      description: "Idéalement : En tant que…, je veux…, afin de…"
+      placeholder: "En tant que pratiquant régulier, je veux exporter mon historique, afin de le garder ailleurs."
+    validations:
+      required: true

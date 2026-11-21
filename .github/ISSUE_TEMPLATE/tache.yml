@@ -1,0 +1,18 @@
+name: Tâche
+description: Un travail qui n'est pas une fonction de l'app (icône, fiche du store, documents…).
+title: "[Tâche] "
+labels: ["type: tâche"]
+body:
+  - type: textarea
+    id: quoi
+    attributes:
+      label: Ce qu'il faut faire
+      placeholder: "Créer l'icône de l'app en 1024 × 1024."
+    validations:
+      required: true
+  - type: textarea
+    id: fini
+    attributes:
+      label: Quand c'est terminé
+      description: Comment savoir que la tâche est finie.
+      placeholder: "L'icône s'affiche sur l'écran d'accueil de l'iPhone."
