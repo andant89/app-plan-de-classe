@@ -7,7 +7,8 @@ Ce projet suit la **méthode projet** (skill « methode-projet ») : je suis le 
 - **Ce que c'est** : une app web gratuite pour aider la maîtresse de 1P-2P de notre fils à répartir ses élèves aux tables (4 places par table), en tenant compte du degré, du besoin d'attention, des paires à séparer et des voisins des plans précédents.
 - **Techno** : une seule page HTML autonome (HTML, CSS et JavaScript sans framework ni serveur), dans `index.html`. Données dans le `localStorage` du navigateur, avec sauvegarde par copier-coller.
 - **Version en cours** : v0.1 (prototype existant), objectif de sprint dans la description du jalon sur GitHub.
-- **Prototype en ligne** : artifact Claude « Plan de classe » (privé, partageable depuis sa page) — https://claude.ai/artifact/Ht5kJhA6XTzuFjU2dxXxQC
+- **App en ligne (GitHub Pages, branche `main`)** : https://andant89.github.io/app-plan-de-classe/ — mise à jour automatique 1 à 2 minutes après chaque push sur `main`.
+- **Prototype Claude** : artifact Claude « Plan de classe » (privé, partageable depuis sa page) — https://claude.ai/artifact/Ht5kJhA6XTzuFjU2dxXxQC
 
 ## Où sont les choses
 
@@ -26,7 +27,7 @@ Quand je dis « lance une séance de brainstorming » (ou « aide-moi à cadrer 
 
 - Rien à compiler : ouvrir `index.html` dans un navigateur (ordinateur, tablette ou téléphone).
 - Tests automatiques : aucun pour l'instant (0 test).
-- Après chaque modification de `index.html`, Claude republie l'artifact « Plan de classe » pour que le PO teste depuis son téléphone.
+- Le PO teste sur https://andant89.github.io/app-plan-de-classe/ après chaque push sur `main` (recharger la page après 1 à 2 minutes).
 
 ## Règles propres à ce projet
 

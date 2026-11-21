@@ -2,6 +2,8 @@
 
 Une petite app web pour aider une enseignante de 1P-2P à répartir ses élèves aux tables : mélange des degrés, répartition des enfants qui demandent beaucoup d'attention, paires à séparer et changement de voisins d'un plan à l'autre.
 
+**Utiliser l'app : https://andant89.github.io/app-plan-de-classe/**
+
 L'app tient dans un seul fichier, [`index.html`](index.html) : il suffit de l'ouvrir dans un navigateur. Les données restent dans le navigateur de l'appareil.
 
 - Cadrage de l'idée : [`docs/cadrage.md`](docs/cadrage.md)
