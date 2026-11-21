@@ -4,16 +4,16 @@ Ce document se remplit **avant** le cahier des charges. Il sert à passer d'une 
 
 Pour le remplir avec Claude, dis : **« Lance une séance de brainstorming »**. Claude pose les questions une par une et remplit ce fichier au fur et à mesure.
 
-**État** : [en cours / terminé] · **Décision** : [go / ajuster / abandon] · **Date** : [AAAA-MM-JJ]
+**État** : en cours · **Décision** : à prendre · **Date** : 2026-11-21
 
 ---
 
 ## 0. L'idée brute
 
-> [L'idée telle qu'elle est venue, sans la retravailler. Une ou deux phrases.]
+> La maîtresse de notre fils trouve que placer les enfants dans la classe est un casse-tête. Régulièrement, elle les change de table en tenant compte des 1P et 2P, des enfants qui ont besoin de plus ou de moins d'attention, et en évitant qu'ils se retrouvent toujours avec les mêmes. Une petite app où elle entre les prénoms et quelques critères pourrait l'aider.
 
-- **Pourquoi moi, pourquoi maintenant** : [Ce qui me donne envie de faire ce projet.]
-- **Ce que je veux en retirer** : [Apprendre, gagner de l'argent, rendre service, me faire plaisir…]
+- **Pourquoi moi, pourquoi maintenant** : la maîtresse nous en a parlé, et j'ai les moyens de l'aider.
+- **Ce que je veux en retirer** : me rendre utile, et trouver une utilité concrète à ce que je sais faire.
 
 ---
 
