@@ -1,12 +1,14 @@
 # Plan de classe — consignes pour Claude
 
-Ce projet suit la **méthode projet** (skill « methode-projet ») : je suis le Product Owner, Claude conçoit, code, pousse et corrige. Tout se fait en français, en mots simples.
+Ce projet suit la **méthode projet** (skill « methode-projet ») en **version allégée** : je suis le Product Owner, Claude conçoit, code, pousse et corrige. Tout se fait en français, en mots simples.
+
+**Décision du PO (2026-11-21)** : c'est un petit outil. Pas de cadrage complet, pas de cahier des charges, pas d'issues ni de user stories. Les retours de la maîtresse sont corrigés directement dans le code ; chaque livraison est décrite au PO en quelques lignes (ce qui change, quoi tester). Les documents de `docs/` restent comme modèles, à utiliser seulement si le PO le demande.
 
 ## Le projet
 
 - **Ce que c'est** : une app web gratuite pour aider la maîtresse de 1P-2P de notre fils à répartir ses élèves aux tables (4 places par table), en tenant compte du degré, du besoin d'attention, des paires à séparer et des voisins des plans précédents.
 - **Techno** : une seule page HTML autonome (HTML, CSS et JavaScript sans framework ni serveur), dans `index.html`. Données dans le `localStorage` du navigateur, avec sauvegarde par copier-coller.
-- **Version en cours** : v0.1 (prototype existant), objectif de sprint dans la description du jalon sur GitHub.
+- **Version en cours** : prototype envoyé à la maîtresse le 2026-11-21, en attente de ses retours.
 - **App en ligne (GitHub Pages, branche `main`)** : https://andant89.github.io/app-plan-de-classe/ — mise à jour automatique 1 à 2 minutes après chaque push sur `main`.
 - **Prototype Claude** : artifact Claude « Plan de classe » (privé, partageable depuis sa page) — https://claude.ai/artifact/Ht5kJhA6XTzuFjU2dxXxQC
 

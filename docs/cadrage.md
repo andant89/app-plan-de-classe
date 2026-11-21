@@ -4,7 +4,7 @@ Ce document se remplit **avant** le cahier des charges. Il sert à passer d'une 
 
 Pour le remplir avec Claude, dis : **« Lance une séance de brainstorming »**. Claude pose les questions une par une et remplit ce fichier au fur et à mesure.
 
-**État** : en pause, en attente de l'entretien avec la maîtresse · **Décision** : à prendre · **Date** : 2026-11-21
+**État** : arrêté (non nécessaire pour un petit outil, décision du PO) · **Décision** : go, sans cadrage complet · **Date** : 2026-11-21
 
 ---
 
