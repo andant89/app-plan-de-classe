@@ -4,7 +4,7 @@ Ce document se remplit **avant** le cahier des charges. Il sert à passer d'une 
 
 Pour le remplir avec Claude, dis : **« Lance une séance de brainstorming »**. Claude pose les questions une par une et remplit ce fichier au fur et à mesure.
 
-**État** : en cours · **Décision** : à prendre · **Date** : 2026-11-21
+**État** : en pause, en attente de l'entretien avec la maîtresse · **Décision** : à prendre · **Date** : 2026-11-21
 
 ---
 
@@ -21,15 +21,17 @@ Pour le remplir avec Claude, dis : **« Lance une séance de brainstorming »**.
 
 ### La phrase problème
 
-> **[Qui]** a du mal à **[faire quoi]** parce que **[raison]**. Aujourd'hui, il se débrouille avec **[solution actuelle]**.
+> **La maîtresse de 1P-2P** a du mal à **refaire régulièrement le plan de classe** parce que **beaucoup de critères doivent être tenus en tête en même temps**. Aujourd'hui, elle se débrouille avec **[solution actuelle inconnue : à lui demander]**.
+
+*Hypothèses du PO, à vérifier avec la maîtresse.*
 
 ### Les 5 pourquoi
 
 Chercher la vraie cause du problème en demandant « pourquoi ? » cinq fois.
 
-1. Pourquoi ? [Réponse]
-2. Pourquoi ? [Réponse]
-3. Pourquoi ? [Réponse]
+1. Pourquoi est-ce un casse-tête ? Trop de critères à tenir en tête en même temps, et une tâche qui revient souvent et prend du temps à chaque fois. *(hypothèse)*
+2. Pourquoi autant de critères ? La classe mélange deux degrés (1P et 2P) ; les enfants ont des besoins d'attention très différents ; certains ne s'entendent pas ou se dissipent ensemble. *(hypothèse)*
+3. Pourquoi ? [À compléter après l'entretien]
 4. Pourquoi ? [Réponse]
 5. Pourquoi ? [Réponse] → **cause profonde** : [Réponse]
 
@@ -67,9 +69,21 @@ Les étapes que suit aujourd'hui le persona principal, et où ça coince.
 
 Interroger 3 à 5 personnes sur ce qu'elles ont **vraiment fait** la dernière fois, pas sur ce qu'elles feraient. Questions types : « Raconte-moi la dernière fois que… », « Qu'as-tu essayé ? », « Combien ça t'a coûté (temps, argent) ? ».
 
+Questions préparées pour la maîtresse :
+
+1. Raconte-moi la dernière fois que tu as changé les places : comment tu t'y es prise ?
+2. Combien de temps ça t'a pris ?
+3. À quoi tu fais attention quand tu places les enfants ?
+4. Qu'est-ce qui est le plus pénible dans tout ça ?
+5. Tous les combien tu changes les places, et pourquoi à ce rythme ?
+6. Combien de tables et d'élèves as-tu cette année ?
+7. Tu as déjà essayé un outil (Excel, une app, un plan à aimanter) ? Qu'est-ce qui n'allait pas ?
+
+Note : le prototype lui a déjà été envoyé le 2026-11-21. Recueillir aussi ses retours sur l'app, séparément de ses réponses sur sa façon de faire actuelle.
+
 | Personne | Ce qu'elle a vraiment fait | Ce qui la gêne le plus | Surprise |
 | --- | --- | --- | --- |
-| [Prénom] | [ ] | [ ] | [ ] |
+| La maîtresse | [ ] | [ ] | [ ] |
 
 **Ce que j'en retiens** : [2 ou 3 phrases.]
 
